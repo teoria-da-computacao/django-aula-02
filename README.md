@@ -4,7 +4,7 @@
 
 ### Breve explicação
 1. Aplicação para gestão de uma lista de tarefas, permitindo, criar, alterar e apagar tarefas
-1. A aplicação tem como base o ficheiro <a href="https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py" target="_blank">models.py</a> onde se define a classe Tarefa, que se materializará numa tabela, na base de dados, para armazenar tarefas
+1. A aplicação tem como base o ficheiro <a href="https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py"  target="_blank">models.py</a> onde se define a classe Tarefa, que se materializará numa tabela, na base de dados, para armazenar tarefas
 1. No modo admin podemos editar tarefas (operações CRUD)
 1. Na consola Python pode também manipular os dados da tabela com [queries](https://docs.djangoproject.com/en/3.2/topics/db/queries/). Veja exemplo em baixo de utilização.
 1. no ficheiro `views.py` tem disponivel as 4 views existentes, que permitem listar (home_page_view), criar, editar e apagar tarefas
