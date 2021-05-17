@@ -1,6 +1,7 @@
 # Aula #2 de Django: Web app Tarefas 
 
-* Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, construída na aula de 17.5.
+* Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, que usa um base de dados.
+* Construída na aula de 17.5.
 * Este documento descreve os detalhes da arquitetura MVT no funcionamento da aplicação. Clique nos links para visualizar o código referenciada. 
 
 ## Primeiros passos para correr aplicação
@@ -17,10 +18,17 @@
 
 
 ## Models
-1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os seus atributos duma tarefa.
-1. A classe materializa-se numa tabela na base de dados, acessível na aplicação admin (http://127.0.0.1:8000/admin/), e que podemos editar (criar, alterar, apagar tarefas) 
-1. As tarefas são instâncias da classe Tarefa, que ficam como registos da tabela Tarefa da base de dados.
-1. Na consola Python podemos importar a classe Tarefa e criar instâncias, guardá-las na base de dados, e depois pesquisá-las e manipulá-las (mais detalhes sobre queries encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)):
+1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os atributos duma tarefa. Explore mais sobre este tópico [aqui](https://docs.djangoproject.com/en/3.2/topics/db/models/) 
+2. Umavez criada a classe Tarefa, esta deve ser ativada. Sempre que criamos ou modificamos um modelo, devemos atualizar django com dois passos:
+    * `python manage.py makemigrations tarefas`
+    * `python manage.py migrate tarefas`
+3. ESta operação cria uma tabela Tarefa na base de dados. 
+3. Deve depois registar a aplicação em [`admin.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/admin.py)  
+3. Deverá criar um superuser, com o comando `python manage.py createsuperuser` para pode aceder ao modo admin e editar diretamente a base de dados.
+3. A aplicação admin é um interface integrado, acessível em http://127.0.0.1:8000/admin/, onde poderemos editar os elementos da tabela (criar, alterar, apagar tarefas) sem 'tocar' em código. 
+4. Experimente criar novas tarefas e editar existentes.
+7. As tarefas são instâncias da classe Tarefa, que ficam como registos da tabela Tarefa da base de dados.
+8. Na consola Python podemos importar a classe Tarefa e criar instâncias, guardá-las na base de dados, e depois pesquisá-las e manipulá-las (mais detalhes sobre *queries* encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)). Exemplos de manipulação:
 ```Python
 from tarefas.models import Tarefa
 
