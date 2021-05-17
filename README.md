@@ -3,7 +3,7 @@
 * Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, construída na aula de 17.5.
 * Este documento descreve os detalhes da arquitetura MVT no funcionamento da aplicação. Clique nos links para visualizar o código referenciada. 
 
-### Primeiros passos para correr aplicação
+## Primeiros passos para correr aplicação
 1. Abra a linha de comandos (PowerShell ou cmd)
 1. Descarregue uma cópia (clone) do repositório com o comando `git clone https://github.com/ULHT-PW-2020-21/pw-aula-django-02` 
 1. Entre na pasta  `cd pw-aula-django-02`
@@ -16,7 +16,7 @@
 1. devera criar um superuser `python manage.py createsuperuser` para pode aceder ao modo admin e ditar diretamente a base de dados
 
 
-### Models
+## Models
 1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os seus atributos duma tarefa.
 1. A classe materializa-se numa tabela na base de dados, acessível na aplicação admin (http://127.0.0.1:8000/admin/), e que podemos editar (criar, alterar, apagar tarefas) 
 1. As tarefas são instâncias da classe Tarefa, que ficam como registos da tabela Tarefa da base de dados.
@@ -39,8 +39,7 @@ t1.delete() # apaga t1 objeto da tabela
 Tarefa.objects.all().delete() # apaga todos os elementos da tabela
 ```
 
-
-### Formulário
+## Formulário
 1. Em [`forms.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criada com base na classe Tarefa. É uma forma muito eficiente e simples para criar instâncias formulário. 
 2. É possível customizar vários campos:
     * podemos escolher para o formulário um subset de atributos de Tarefa
@@ -54,7 +53,7 @@ Tarefa.objects.all().delete() # apaga todos os elementos da tabela
 
 
 
-### Views
+## Views
 1. Em [`views.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py) existem 4 funções view que permitem listar, criar, editar e apagar tarefas:
 ```Python 
 home_page_view(request)
@@ -68,12 +67,12 @@ apaga_tarefa_view(request, tarefa_id)
     2. guardam num formulário os dados submetidos, com `form = TarefaForm(request.POST)`, sendo osdados posteriormente [guardados na base de dados](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L19).
 
 
-### URLs
+## URLs
 1. O ficheiro config/urls.py encaminha para a aplicação tarefas
 2. O ficheiro tarefas/urls.py tem rotas para as views existentes
 
 
-### Templates
+## Templates
 1. Os templates usam como layout base [`base.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html), que é estendido por todos os templates da aplicação
 1. O template base está estilizado por um CSS criado, [`base.css`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/static/tarefas/base.css). 
 2. Também são usadas algumas classes Bootstrap (importadas através de um [link](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html#L7)). 
