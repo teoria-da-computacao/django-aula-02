@@ -1,9 +1,9 @@
 # pw-aula-django-02
 
 # Web app Tarefas 
-(app construída na aula de 17.5)
 
-1. Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas
+* Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, construída na aula de 17.5.
+* Este documento descreve o funcionamento da aplicação. Clique nos links para visualizar a explicação. 
 
 ### Base de dados
 1. A aplicação tem como base o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py) onde se define a classe Tarefa, que se materializará numa tabela na base de dados, para armazenar tarefas.
