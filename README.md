@@ -1,6 +1,5 @@
-# pw-aula-django-02
-
 # Web app Tarefas 
+*pw-aula-django-02*
 
 * Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, construída na aula de 17.5.
 * Este documento descreve o funcionamento da aplicação. Clique nos links para visualizar a explicação. 
