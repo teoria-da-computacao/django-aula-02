@@ -3,7 +3,7 @@
 * Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, construída na aula de 17.5.
 * Este documento descreve os detalhes da arquitetura MVT no funcionamento da aplicação. Clique nos links para visualizar o código referenciada. 
 
-### Passos para correr aplicação
+### Primeiros passos para correr aplicação
 1. Abra a linha de comandos (PowerShell ou cmd)
 1. Descarregue uma cópia (clone) do repositório com o comando `git clone https://github.com/ULHT-PW-2020-21/pw-aula-django-02` 
 1. Entre na pasta  `cd pw-aula-django-02`
@@ -17,12 +17,10 @@
 
 
 ### Models
-1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py). 
-2. A classe Tarefa especifica os seus atributos duma tarefa
-1. A classe materializa-se numa tabela na base de dados.
-2. As tarefas são instâncias da classe que ficam registadas na tabela da base de dados.
-3. Na aplicação admin (http://127.0.0.1:8000/admin/) podemos editar (criar, alterar, apagar) tarefas
-4. Na consola Python podemos criar instâncias de tarefas, e armazená-las na base de dados, assim como pesquisá-las com queries:
+1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os seus atributos duma tarefa.
+1. A classe materializa-se numa tabela na base de dados, acessível na aplicação admin (http://127.0.0.1:8000/admin/), e que podemos editar (criar, alterar, apagar tarefas) 
+1. As tarefas são instâncias da classe Tarefa, que ficam como registos da tabela Tarefa da base de dados.
+1. Na consola Python podemos criar instâncias de Tarefa, guardá-las na base de dados, assim como pesquisá-las e manipulá-las (mais detalhes sobre queries encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)):
 ```Python
 from tarefas.models import Tarefa
 
@@ -40,7 +38,6 @@ tarefas = Tarefa.objects.all()   # obtém QuerySet de todos os objetos da tabela
 t1.delete() # apaga t1 objeto da tabela
 Tarefa.objects.all().delete() # apaga todos os elementos da tabela
 ```
-5. Mais detalhes sobre queries encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/).
 
 
 ### Formulário
