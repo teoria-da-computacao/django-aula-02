@@ -61,16 +61,13 @@ ordenadas = sorted(Tarefa.objects.all(), key=lambda objeto:objeto.prioridade)
 
 ## Formulário
 1. Em [`forms.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criada com base na classe Tarefa. É uma forma muito eficiente e simples para criar instâncias formulário. 
-2. É possível customizar vários campos:
-    * podemos escolher para o formulário um subset de atributos de Tarefa
+    * criar um objeto [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) com dados enviados pelo utilizador através de um template, que se válidos são guardados na base de dados.
+    * criar um objeto [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L29) com dados enviados pelo utilizador de uma determinada instância existente que, depois de válidados, são guardados na base de dados as alterações que recebidas.
+2. É possível customizar os campos na classe Form:
+    * podemos apresentar no formulário apenas um subset de atributos de Tarefa
     * [`labels`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L18) a ser apresentadas em substituição do nome do atributo da classe 
     * [`widgets`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L11) permitem especificar pares propriedade=valor do elemento HTML `<input>` de um determinado campo do formulário; valores para propriedades tais como `class`, `placeholder`, valores `max` e `min`. 
     * [`help_texts`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L25) especificam texto auxiliar dum determinado campo do formulário.
-1. A classe TarefaForm serve para:
-    * criar um [formulário vazio](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) a inserir no template [`nova.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/nova.html#L8).
-    * criar um objeto [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) com dados enviados pelo utilizador através de um template, que se válidos são guardados na base de dados.
-    * criar um objeto [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L29) com dados enviados pelo utilizador de uma determinada instância existente que, depois de válidados, são guardados na base de dados as alterações que recebidas.
-
 
 
 ## Views
@@ -81,10 +78,34 @@ nova_tarefa_view(request)
 edita_tarefa_view(request, tarefa_id)
 apaga_tarefa_view(request, tarefa_id)
 ```
-1. As funções edita e apaga recebem como argumento, além do request, o id (primary-key) da tarefa que editam / apagam.  
-2. As views que renderizam templates com formulários têm duas partes:
+   
+   * `home_page_view`: lista as tarefas. Passamos no contexto o QuerySet de todos os objetos da base de dados obtido com `Tarefa.objects.all()`
+
+
+### `nova_tarefa_view`
+
+1. Cria-se um [formulário vazio](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) `form = TarefaForm()`, a inserir no template [`nova.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/nova.html#L8).
+1. uma vez submetido o formulário, devemos processar e armazenar os dados. para tal, insere-se `request.POST` no argumento, ficando `form = TarefaForm(request.POST or None)`, que caso tenham sido enviado dados por POST, preenche o form. 
+1.	caso o formulario seja válido:
+    1. o comando form.save() grava diretamente os dados da nova tarefa na base de dados!
+    1. [redirecionamos](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/views.py#L20) para a view `tarefas:home`.
+4. caso os dados sejam inválidos ou não tenha sido submetido nada, um formulario em branco será enviado novamente
+
+### `edita_tarefa_view`
+1. para cada tarefa, adicionamos um [botão para editar](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/templates/tarefas/home.html#L23) a tarefa, hiperlink com `class=btn`! Especifica-se em href a chave primaria tarefa.id, que servirá para identificar a tarefa a editar por edita_tarefa_view
+2. em `urls.py`, a [rota edita](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/urls.py#L11) especifica que recebe id da tarefa, um inteiro.
+3. `edita_tarefa_view` recebe como argumento, além do request, tarefa_id, primary-key da tarefa a editar.  
+4. tarefa_id é usado para obter a respetiva instância, permitindo criar um formulário preenchido com os dados registados na tabela. 
+5. [`edita.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/edita.html) é semelhante a nota.html, excepto que tem:
+    `<form action="{% url 'tarefas:edita' tarefa_id %}" method="POST">`
+
+
+
+5. As views que renderizam templates com formulários têm duas partes:
     1. [criam uma instância de formulário](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) sem dados, passada ao template para recolher dados dos utilizadores.
     2. guardam num formulário os dados submetidos, com `form = TarefaForm(request.POST)`, sendo osdados posteriormente [guardados na base de dados](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L19).
+
+### `apaga_tarefa_view`
 
 
 ## URLs
