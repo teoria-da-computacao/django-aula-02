@@ -1,8 +1,7 @@
-# Web app Tarefas 
-*pw-aula-django-02*
+# Aula #2 de Django: Web app Tarefas 
 
 * Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, construída na aula de 17.5.
-* Este documento descreve o funcionamento da aplicação. Clique nos links para visualizar a explicação. 
+* Este documento descreve os detalhes da arquitetura MVT no funcionamento da aplicação. Clique nos links para visualizar a explicação. 
 
 ### Passos para lançar a aplicação
 1. Abra a linha de comandos (PowerShell ou cmd)
@@ -18,8 +17,8 @@
 
 
 ### Models
-1. A aplicação tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py) onde se define a classe Tarefa, que se materializará numa tabela na base de dados, para armazenar tarefas.
-1. Na aplicação admin (http://127.0.0.1:8000/admin/) podemos editar tarefas (para aceder a admin deve criar um superuser `python manage.py createsuperuser`)
+1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py). Em models define-se a classe Tarefa com a especificação de atributos associados a cada tarefa, que se materializarão numa tabela na base de dados onde serão armazenadas as tarefas criadas.
+1. Na aplicação admin (http://127.0.0.1:8000/admin/) podemos editar (criar, alterar, apagar) tarefas
 1. Na consola Python pode também manipular os dados da tabela com queries.
 1. São exemplificadas algumas das queries que se podem fazer. Mais detalhes consulte [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/).
 ```Python
