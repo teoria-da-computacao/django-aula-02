@@ -4,14 +4,22 @@
 (app construída na aula de 17.5)
 
 1. Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas
-1. A aplicação tem como base o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py) onde se define a classe Tarefa, que se materializará numa tabela, na base de dados, para armazenar tarefas.
+
+### Base de dados
+1. A aplicação tem como base o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py) onde se define a classe Tarefa, que se materializará numa tabela na base de dados, para armazenar tarefas.
 1. Na aplicação admin (http://127.0.0.1:80007admin/) podemos editar tarefas (para aceder a admin deve criar um superuser `python manage.py createsuperuser`)
 1. Na consola Python pode também manipular os dados da tabela com queries. Veja [exemplo](#queries) em baixo, e consulte [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/) para mais detalhes.
-1. no ficheiro `views.py` tem disponivel as 4 views existentes, que permitem listar (home_page_view), criar, editar e apagar tarefas
-1. Os templates usam como layout [`base.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html), que está estilizado usando um CSS [`base.css`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/static/tarefas/base.css) assim como algumas classes do Bootstrap (estilos do Bootstrap são importados através de um link). Usam-se as classes jumbotron (para header) e btn para formatar botões.
-2. na pasta `website\templates\pw` crie uma página HTML correspondente para ser renderizada, extendendo a base.html (veja como é feito nas outras páginas)
-3. no ficheiro `website\urls.py` crie um novo `path` para o novo URL
-4. no ficheiro `base.html` (que está na pasta `website\templates\website`) atualize o menu de navegação, inlcuindo um link para a nova página
+
+### Aplicação DJango
+1. Em [`views.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py) existem 4 views que permitem listar, criar, editar e apagar tarefas.
+1. Em particular, as funções view para editar e apagar recebem como argumento, além do request, a primary-key da respetiva tarefa.  
+1. [`forms.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criado com base na classe Tarefa. Uma forma muito eficiente e simples de criar um formulário. É possível customizar vários campos:
+    * [`labels`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L18) a ser apresentadas em substituição do nome do atributo da classe 
+    * [`widgets`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L11) permitem especificar pares propriedade=valor do elemento HTML `<input>` de um determinado campo do formulário; valores para propriedades tais como `class`, `placeholder`, valores `max` e `min`. 
+    * [`help_texts`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L25) especificam texto auxiliar dum determinado campo do formulário.
+3. A utilização do formulário 
+
+3. Os templates usam como layout [`base.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html), que está estilizado usando um CSS [`base.css`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/static/tarefas/base.css) assim como algumas classes do Bootstrap (estilos do Bootstrap são importados através de um link). Usam-se as classes jumbotron (para header) e btn para formatar botões.
 
 
 ### Passos para lançar e editar a aplicação
