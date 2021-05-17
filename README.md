@@ -18,22 +18,32 @@
 
 
 ## Models
-1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os atributos duma tarefa. Explore mais sobre este tópico [aqui](https://docs.djangoproject.com/en/3.2/topics/db/models/) 
-2. Umavez criada a classe Tarefa, esta deve ser ativada. Sempre que criamos ou modificamos um modelo, devemos atualizar django com dois passos:
+1. A Web App Tarefas tem como ponto de partida o ficheiro [`models.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os atributos duma tarefa. Explore mais sobre este tópico [aqui](https://docs.djangoproject.com/en/3.2/topics/db/models/) 
+2. Umavez criada a classe Tarefa, esta deve ser ativada. Sempre que criamos ou modificamos um modelo, devemos atualizar o Django com dois passos:
     * `python manage.py makemigrations tarefas`
     * `python manage.py migrate tarefas`
-3. ESta operação cria uma tabela Tarefa na base de dados. 
+3. Esta operação cria uma tabela Tarefa na base de dados. 
 3. Deve depois registar a aplicação em [`admin.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/admin.py)  
 3. Deverá criar um superuser, com o comando `python manage.py createsuperuser` para pode aceder ao modo admin e editar diretamente a base de dados.
 3. A aplicação admin é um interface integrado, acessível em http://127.0.0.1:8000/admin/, onde poderemos editar os elementos da tabela (criar, alterar, apagar tarefas) sem 'tocar' em código. 
 4. Experimente criar novas tarefas e editar existentes.
 7. As tarefas são instâncias da classe Tarefa, que ficam como registos da tabela Tarefa da base de dados.
-8. Na consola Python podemos importar a classe Tarefa e criar instâncias, guardá-las na base de dados, e depois pesquisá-las e manipulá-las (mais detalhes sobre *queries* encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)). Exemplos de manipulação:
+
+
+## Manipulação da BD da consola Python
+1. uma vez criados os seus modelos de dados, o Django dá-lhe uatomaticamente uma API de abstração de dados que lhe permite criar, recuperar, atualizar e apagar objetos.
+2. Para representar os dados da tabela da BD em objetos Python, Django usa um sistema intuitivo:
+    * Uma classe de modelo representa uma tabela da BD
+    * uma instância dessa classe representa um registro particular na tabela da BD.
+    * QuerySet (coleção de objetos da base de dados)
+    * mais detalhes [aqui](https://docs.djangoproject.com/en/3.2/topics/db/queries/) 
+Na consola Python podemos importar a classe Tarefa e criar instâncias, guardá-las na base de dados, e depois pesquisá-las e manipulá-las (mais detalhes sobre *queries* encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)). 
+2. Exemplos de manipulação:
 ```Python
-from tarefas.models import Tarefa
+from tarefas.models import Tarefa # importação da classe Tarefa, para manipular a BD
 
 t1 = Tarefa(titulo='Ir correr', prioridade=2) # cria nova tarefa
-t1.save()
+t1.save()  # •	o Django não altera a BD até chamar explicitamente save(). corresponde à instrução SQL UPDATE
 t2 = Tarefa(titulo='Ir ao cinema', prioridade=2) # cria nova tarefa
 t2.save()
 t3 = Tarefa(titulo='Fazer laboratório de PW', prioridade=2) # cria nova tarefa
@@ -42,9 +52,11 @@ t4 = Tarefa(titulo='Ir passear', prioridade=1); t4.save()  # cria nova tarefa
 
 t3.prioridade = 3; t3.save() # alterar valor de atributo
 
-tarefas = Tarefa.objects.all()   # obtém QuerySet de todos os objetos da tabela
+tarefas = Tarefa.objects.all()   # retorna uma QuerySet, coleção de objetos da base de dados
 t1.delete() # apaga t1 objeto da tabela
-Tarefa.objects.all().delete() # apaga todos os elementos da tabela
+prioritarias = Tarefa.objects.filter(prioridade=1)  # Retorna um novo QuerySet dos objetos que correspondem aos kwargs de pesquisa fornecidos.
+tarefa = Tarefa.objects.get(pk=1) # retorna instância específica
+ordenadas = sorted(Tarefa.objects.all(), key=lambda objeto:objeto.prioridade)
 ```
 
 ## Formulário
