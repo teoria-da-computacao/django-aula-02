@@ -20,7 +20,7 @@
 1. A Web App Tarefas tem como ponto de partida o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os seus atributos duma tarefa.
 1. A classe materializa-se numa tabela na base de dados, acessível na aplicação admin (http://127.0.0.1:8000/admin/), e que podemos editar (criar, alterar, apagar tarefas) 
 1. As tarefas são instâncias da classe Tarefa, que ficam como registos da tabela Tarefa da base de dados.
-1. Na consola Python podemos criar instâncias de Tarefa, guardá-las na base de dados, assim como pesquisá-las e manipulá-las (mais detalhes sobre queries encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)):
+1. Na consola Python podemos importar a classe Tarefa e criar instâncias, guardá-las na base de dados, e depois pesquisá-las e manipulá-las (mais detalhes sobre queries encontra em [djangoproject](https://docs.djangoproject.com/en/3.2/topics/db/queries/)):
 ```Python
 from tarefas.models import Tarefa
 
@@ -41,7 +41,9 @@ Tarefa.objects.all().delete() # apaga todos os elementos da tabela
 
 
 ### Formulário
-1. Em [`forms.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criado com base na classe Tarefa. Uma forma muito eficiente e simples para criar instâncias formulário. É possível customizar vários campos:
+1. Em [`forms.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criada com base na classe Tarefa. É uma forma muito eficiente e simples para criar instâncias formulário. 
+2. É possível customizar vários campos:
+    * podemos escolher para o formulário um subset de atributos de Tarefa
     * [`labels`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L18) a ser apresentadas em substituição do nome do atributo da classe 
     * [`widgets`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L11) permitem especificar pares propriedade=valor do elemento HTML `<input>` de um determinado campo do formulário; valores para propriedades tais como `class`, `placeholder`, valores `max` e `min`. 
     * [`help_texts`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L25) especificam texto auxiliar dum determinado campo do formulário.
