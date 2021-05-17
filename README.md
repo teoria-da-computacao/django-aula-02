@@ -4,9 +4,9 @@
 
 ### Breve explicação
 1. Aplicação para gestão de uma lista de tarefas, permitindo, criar, alterar e apagar tarefas
-1. A aplicação tem como base o ficheiro <a href="https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py"  target="_blank">models.py</a> onde se define a classe Tarefa, que se materializará numa tabela, na base de dados, para armazenar tarefas
-1. No modo admin podemos editar tarefas (operações CRUD)
-1. Na consola Python pode também manipular os dados da tabela com [queries](https://docs.djangoproject.com/en/3.2/topics/db/queries/). Veja exemplo em baixo de utilização.
+1. A aplicação tem como base o ficheiro [models.py](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py) onde se define a classe Tarefa, que se materializará numa tabela, na base de dados, para armazenar tarefas.
+1. Na aplicação admin (http://127.0.0.1:80007admin/) podemos editar tarefas (para aceder a admin deve criar um superuser `python manage.py createsuperuser`)
+1. Na consola Python pode também manipular os dados da tabela com [queries](https://docs.djangoproject.com/en/3.2/topics/db/queries/). Veja [exemplo](#queries) em baixo de utilização.
 1. no ficheiro `views.py` tem disponivel as 4 views existentes, que permitem listar (home_page_view), criar, editar e apagar tarefas
 1. Os templates usam como base `base.html`, que está estilizado usando um CSS `base.css` assim como algumas classes do Bootstrap (estilos do Bootstrap são importados através de um link). Usam-se as classes jumbotron (para header) e btn para formatar botões.
 2. na pasta `website\templates\pw` crie uma página HTML correspondente para ser renderizada, extendendo a base.html (veja como é feito nas outras páginas)
@@ -24,8 +24,9 @@
 1. Lance a aplicação no browser com o comando `python manage.py runserver`. 
 1. Tem disponíveis as aplicações hello no link `http://127.0.0.1:8000`
 1. abra a pasta com o Pycharm, para a explorar.
+1. devera criar um superuser `python manage.py createsuperuser` para pode aceder ao modo admin e ditar diretamente a base de dados
 
-## Exemplo de utilização de queries
+## Queries
 
 ```Python
 
