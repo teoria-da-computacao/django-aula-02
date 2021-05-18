@@ -84,7 +84,10 @@ apaga_tarefa_view(request, tarefa_id)
 
 #### nova_tarefa_view
 
-1. Na view `nova_tarefa_view`, cria-se um [formulário vazio](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) `form = TarefaForm()`
+1. Na view `nova_tarefa_view`, cria-se um [formulário vazio](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) 
+```Python
+form = TarefaForm(request.POST or None)
+```
 1. irá no contexto para renderizar o template com o formulário de Tarefa.
 2. Em template [`nova.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/nova.html#L8), no formulário, os campos (*fields*) de TarefaForm são inseridos como inputs com {{ form.as_p }}.
 3. É necessário inseri o input submit.
