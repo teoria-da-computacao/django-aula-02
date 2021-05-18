@@ -83,7 +83,7 @@ apaga_tarefa_view(request, tarefa_id)
     2. quando recebem dados (`request.POST`), guardam-nos num formulário (actualizado para `form = TarefaForm(request.POST or None)`), sendo estes então guardados na base de dados (`forms.save()`).
 1. São detalhadas em baixo as views
 
-### 1.1 View home_page_view() - simplificada
+## 1.1 View home_page_view() - simplificada
 ```python
 def home_page_view(request):
     context = {'tarefas': Tarefa.objects.all()}
@@ -92,7 +92,7 @@ def home_page_view(request):
 1. Lista as tarefas. Passamos no contexto o QuerySet de todos os objetos da base de dados obtido com `Tarefa.objects.all()`
 2. poderiamos ordenar com a função sorted, em função da prioridade. com ```'tarefas': sorted(Tarefa.objects.all(), key=lambda objeto:objeto.prioridade, reverse=True)```
 
-### 1.2 Template home.html - simplificado
+## 1.2 Template home.html - simplificado
 ```html
 {% extends 'tarefas/base.html' %}
 
@@ -110,7 +110,7 @@ def home_page_view(request):
 2. inclui-se para cada tarefa um botão que permite editar a tarefa. É passado no href, o id da tarefa, para que a view saiba qual tarefa deve ser editada.
 3. O [template final](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/home.html) fica mais colorido, pois é inserida mais informação (data, prioridade, concluido).
 
-### 2.1 View nova_tarefa_view() - simplificada
+## 2.1 View nova_tarefa_view() - simplificada
 ```Python
 def nova_tarefa_view(request):
     form = TarefaForm()
@@ -121,7 +121,7 @@ def nova_tarefa_view(request):
 1. será enviado via dicionário context, para renderizar o template com o formulário de Tarefa.
 
 
-### 2.2 Template nova.html
+## 2.2 Template nova.html
 ```html
 {% extends 'tarefas/base.html' %}
 
@@ -141,7 +141,7 @@ def nova_tarefa_view(request):
 6. É inserido um hiperlink cancelar para 'tarefas:home', caso queiramos cancelar a criação de nova tarefa. É estilizado como um botão com `class="btn"`. 
 7. action="" quer dizer que o formulário é enviado de volta para a mesa view que o renderizou. Seria semelhante a especificar ```action="{% url 'tarefas:nova' %}"```
 
-### 2.3 View nova_tarefa_view() - completa
+## 2.3 View nova_tarefa_view() - completa
 ```Python
 def nova_tarefa_view(request):
     form = TarefaForm(request.POST or None)
@@ -158,7 +158,7 @@ def nova_tarefa_view(request):
 10. caso os dados sejam inválidos ou não tenha sido submetido nada, um formulario em branco será enviado novamente
 
 
-#### 3.1 View edita_tarefa_view
+## 3.1 View edita_tarefa_view
 1. em [`home.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/templates/tarefas/home.html#L23), para cada tarefa, é adicionado um hiperlink (transformado em botão com `class=btn`) `<a href="{% url 'tarefas:edita' tarefa.id %}" class="btn">`, identificando com tarefa.id a tarefa a editar
 2. em `urls.py`, a [rota edita](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/urls.py#L11) especifica que recebe id da tarefa, um inteiro.
 3. [`edita_tarefa_view`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L27)  recebe como argumento, além do request, tarefa_id, primarykey da tarefa a editar.  
@@ -166,7 +166,7 @@ def nova_tarefa_view(request):
 5. além do formulário preenchido, é enviado no contexto o id da tarefa, usado na action do form em [`edita.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/edita.html), semelhante a nota.html, excepto que tem tarefa_id:
     `<form action="{% url 'tarefas:edita' tarefa_id %}" method="POST">`
 
-#### 4.2 Template edita.html
+## 3.2 Template edita.html
 ```html
 {% extends 'tarefas/base.html' %}
 {% block main %}
@@ -184,7 +184,7 @@ def nova_tarefa_view(request):
 1. Template semelhante a nova.html, à excepção de `action="{% url 'tarefas:edita' tarefa_id %}"` que especifica tarefa_id, a tarefa a alterar.
 2. Além do hiperlink/botão cancelar, é inserido um hiperlink/botão apagar, que mapeia para a view 'tarefas:apaga'
 
-#### 4.1 apaga_tarefa_view
+## 4.1 apaga_tarefa_view
 ```python
 def apaga_tarefa_view(request, tarefa_id):
     Tarefa.objects.get(id=tarefa_id).delete()
