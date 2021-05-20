@@ -1,7 +1,7 @@
 # Aula #2 de Django: Web app Tarefas 
 
 * Aplicação para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, que usa um base de dados.
-* Construída na aula de 17.5.
+* Construída na aula de 17.5. Veja o [vídeo da aula](https://educast.fccn.pt/vod/clips/1m7vvfknq2/link_box_h?locale=en), que tem capítulos para os vários tópicos abordados. 
 * Este documento descreve os detalhes da arquitetura MVT no funcionamento da aplicação. Clique nos links para visualizar o código referenciada. 
 
 ## Primeiros passos para correr aplicação
