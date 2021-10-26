@@ -1,13 +1,13 @@
 # Aula #2 de Django: Web app Tarefas 
 
 * Aplicação (o código está disponível neste GitHub) para gestão de tarefas, permitindo, criar, alterar e apagar tarefas, que usa um base de dados.
-* Construída na aula de 17.5. Veja o [vídeo da aula](https://educast.fccn.pt/vod/clips/1m7vvfknq2/link_box_h?locale=en), que tem capítulos para os vários tópicos abordados. 
+* Se quser, veja o [vídeo da aula](https://educast.fccn.pt/vod/clips/1m7vvfknq2/link_box_h?locale=en), que tem capítulos para os vários tópicos abordados. 
 * Este documento descreve os detalhes da arquitetura MVT no funcionamento da aplicação. Clique nos links para visualizar o código referenciada. 
 
 ## Primeiros passos para correr aplicação
 1. Abra a linha de comandos (PowerShell ou cmd)
-1. Descarregue uma cópia (clone) do repositório com o comando `git clone https://github.com/ULHT-PW-2020-21/pw-aula-django-02` 
-1. Entre na pasta  `cd pw-aula-django-02`
+1. Descarregue uma cópia (clone) do repositório com o comando `git clone https://github.com/teoria-da-computacao/django-aula-02` 
+1. Entre na pasta  `cd django-aula-02`
 1. Garanta que tem o pipenv instalado, correndo o comando `python3 -m pip install pipenv`
 1. Crie um ambiente virtual `pipenv install django` 
 1. Active o ambiente virtual `pipenv shell`
@@ -18,12 +18,12 @@
 
 
 # Models
-1. A Web App Tarefas tem como ponto de partida o ficheiro [`models.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os atributos duma tarefa. Explore mais sobre este tópico [aqui](https://docs.djangoproject.com/en/3.2/topics/db/models/) 
+1. A Web App Tarefas tem como ponto de partida o ficheiro [`models.py`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/models.py), onde a classe Tarefa especifica os atributos duma tarefa. Explore mais sobre este tópico [aqui](https://docs.djangoproject.com/en/3.2/topics/db/models/) 
 2. Umavez criada a classe Tarefa, esta deve ser ativada. Sempre que criamos ou modificamos um modelo, devemos atualizar o Django com dois passos:
     * `python manage.py makemigrations tarefas`
     * `python manage.py migrate tarefas`
 3. Esta operação cria uma tabela Tarefa na base de dados. 
-3. Deve depois registar a aplicação em [`admin.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/admin.py)  
+3. Deve depois registar a aplicação em [`admin.py`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/admin.py)  
 3. Deverá criar um superuser, com o comando `python manage.py createsuperuser` para pode aceder ao modo admin e editar diretamente a base de dados.
 3. A aplicação admin é um interface integrado, acessível em http://127.0.0.1:8000/admin/, onde poderemos editar os elementos da tabela (criar, alterar, apagar tarefas) sem 'tocar' em código. 
 4. Experimente criar novas tarefas e editar existentes.
@@ -60,18 +60,18 @@ ordenadas = sorted(Tarefa.objects.all(), key=lambda objeto:objeto.prioridade)
 ```
 
 # Formulário
-1. Em [`forms.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criada com base na classe Tarefa. É uma forma muito eficiente e simples para criar instâncias formulário. 
-    * criar um objeto [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L17) com dados enviados pelo utilizador através de um template, que se válidos são guardados na base de dados.
+1. Em [`forms.py`](https://github.com/teoria-da-computacao/django-aula-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py) é definida a classe TarefaForm, classe de formulário criada com base na classe Tarefa. É uma forma muito eficiente e simples para criar instâncias formulário. 
+    * criar um objeto [formulário preenchido](https://github.com//teoria-da-computacao/django-aula-02/blob/master/tarefas/views.py#L17) com dados enviados pelo utilizador através de um template, que se válidos são guardados na base de dados.
     * 
 2. É possível customizar os campos na classe Form:
     * podemos apresentar no formulário apenas um subset de atributos de Tarefa
-    * [`labels`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L18) a ser apresentadas em substituição do nome do atributo da classe 
-    * [`widgets`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L11) permitem especificar pares propriedade=valor do elemento HTML `<input>` de um determinado campo do formulário; valores para propriedades tais como `class`, `placeholder`, valores `max` e `min`. 
-    * [`help_texts`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L25) especificam texto auxiliar dum determinado campo do formulário.
+    * [`labels`](https://github.com/teoria-da-computacao/django-aula-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L18) a ser apresentadas em substituição do nome do atributo da classe 
+    * [`widgets`](https://github.com/teoria-da-computacao/django-aula-02/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L11) permitem especificar pares propriedade=valor do elemento HTML `<input>` de um determinado campo do formulário; valores para propriedades tais como `class`, `placeholder`, valores `max` e `min`. 
+    * [`help_texts`](https://github.com/teoria-da-computacao/django-aula-02/blob/21a2f865f02eeb36007ac3e4916cc0dc69835c6b/tarefas/forms.py#L25) especificam texto auxiliar dum determinado campo do formulário.
 
 
 # Views e respetivos Templates para operações CRUD
-1. Em [`views.py`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py) existem 4 funções view que permitem listar, criar, editar e apagar tarefas (operações CRUD):
+1. Em [`views.py`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/views.py) existem 4 funções view que permitem listar, criar, editar e apagar tarefas (operações CRUD):
 ```Python 
 home_page_view(request)
 nova_tarefa_view(request)
@@ -108,7 +108,7 @@ def home_page_view(request):
 ```
 1. renderiza-se, com um ciclo for, incluindo apenas o título.
 2. inclui-se para cada tarefa um botão que permite editar a tarefa. É passado no href, o id da tarefa, para que a view saiba qual tarefa deve ser editada.
-3. O [template final](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/home.html) fica mais colorido, pois é inserida mais informação (data, prioridade, concluido).
+3. O [template final](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/home.html) fica mais colorido, pois é inserida mais informação (data, prioridade, concluido).
 
 ## 2.1 View nova_tarefa_view() - simplificada
 ```Python
@@ -117,7 +117,7 @@ def nova_tarefa_view(request):
     context = {'form': form}
     return render(request, 'tarefas/nova.html', context)
 ```
-1. Em [`nova_tarefa_view`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L16), cria-se um formulário que irá vazio.
+1. Em [`nova_tarefa_view`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/views.py#L16), cria-se um formulário que irá vazio.
 1. será enviado via dicionário context, para renderizar o template com o formulário de Tarefa.
 
 
@@ -136,7 +136,7 @@ def nova_tarefa_view(request):
     </form>
 {% endblock %}
 ```
-3. Em template [`nova.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/nova.html#L8), no formulário, a variável {{ form.as_p }} inserirá todos os campos especificados em TarefaForm (*fields*). O sufixo `.as_p` indica para colocar cada input dentro de um elemento `<p>`. Se não se puser extensão, é coocado dentro de um elemento `<tr>`.
+3. Em template [`nova.html`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/nova.html#L8), no formulário, a variável {{ form.as_p }} inserirá todos os campos especificados em TarefaForm (*fields*). O sufixo `.as_p` indica para colocar cada input dentro de um elemento `<p>`. Se não se puser extensão, é coocado dentro de um elemento `<tr>`.
 5. É necessário inseri o input submit.
 6. É inserido um hiperlink cancelar para 'tarefas:home', caso queiramos cancelar a criação de nova tarefa. É estilizado como um botão com `class="btn"`. 
 7. action="" quer dizer que o formulário é enviado de volta para a mesa view que o renderizou. Seria semelhante a especificar ```action="{% url 'tarefas:nova' %}"```
@@ -159,11 +159,11 @@ def nova_tarefa_view(request):
 
 
 ## 3.1 View edita_tarefa_view
-1. em [`home.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/templates/tarefas/home.html#L23), para cada tarefa, é adicionado um hiperlink (transformado em botão com `class=btn`) `<a href="{% url 'tarefas:edita' tarefa.id %}" class="btn">`, identificando com tarefa.id a tarefa a editar
-2. em `urls.py`, a [rota edita](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/urls.py#L11) especifica que recebe id da tarefa, um inteiro.
-3. [`edita_tarefa_view`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L27)  recebe como argumento, além do request, tarefa_id, primarykey da tarefa a editar.  
-4. tarefa_id é usado para obter a respetiva [instância](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/baafbe87a25b47bdaf8708e977e8c5411496273b/tarefas/views.py#L28), permitindo criar um [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L29) com os dados registados na tabela. 
-5. além do formulário preenchido, é enviado no contexto o id da tarefa, usado na action do form em [`edita.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/edita.html), semelhante a nota.html, excepto que tem tarefa_id:
+1. em [`home.html`](https://github.com/teoria-da-computacao/django-aula-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/templates/tarefas/home.html#L23), para cada tarefa, é adicionado um hiperlink (transformado em botão com `class=btn`) `<a href="{% url 'tarefas:edita' tarefa.id %}" class="btn">`, identificando com tarefa.id a tarefa a editar
+2. em `urls.py`, a [rota edita](https://github.com/teoria-da-computacao/django-aula-02/blob/e784009df93d7ba80abe3ccb2c7d3b90ae55ee2e/tarefas/urls.py#L11) especifica que recebe id da tarefa, um inteiro.
+3. [`edita_tarefa_view`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/views.py#L27)  recebe como argumento, além do request, tarefa_id, primarykey da tarefa a editar.  
+4. tarefa_id é usado para obter a respetiva [instância](https://github.com/teoria-da-computacao/django-aula-02/blob/baafbe87a25b47bdaf8708e977e8c5411496273b/tarefas/views.py#L28), permitindo criar um [formulário preenchido](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/views.py#L29) com os dados registados na tabela. 
+5. além do formulário preenchido, é enviado no contexto o id da tarefa, usado na action do form em [`edita.html`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/edita.html), semelhante a nota.html, excepto que tem tarefa_id:
     `<form action="{% url 'tarefas:edita' tarefa_id %}" method="POST">`
 
 ## 3.2 Template edita.html
@@ -214,8 +214,8 @@ urlpatterns = [
 
 
 # Templates
-1. Os templates usam um layout base [`base.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html), que é estendido por todos os templates da aplicação
-1. O template base está estilizado por um CSS criado, [`base.css`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/static/tarefas/base.css). 
+1. Os templates usam um layout base [`base.html`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/base.html), que é estendido por todos os templates da aplicação
+1. O template base está estilizado por um CSS criado, [`base.css`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/static/tarefas/base.css). 
 2. Também são usadas algumas classes Bootstrap (importadas através de um [link](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html#L7)). 
-    * Classe jumbotron no [header](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/base.html#L12)) 
-    * Classe btn para formatar um botão, e associados btn-sucess, btn-warning, btn-warning que especificam cores (verde, amarelo e vermelho). Ver em [`nova.html`](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/nova.html) e [`edita.html´](https://github.com/ULHT-PW-2020-21/pw-aula-django-02/blob/master/tarefas/templates/tarefas/edita.html#L9)).
+    * Classe jumbotron no [header](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/base.html#L12)) 
+    * Classe btn para formatar um botão, e associados btn-sucess, btn-warning, btn-warning que especificam cores (verde, amarelo e vermelho). Ver em [`nova.html`](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/nova.html) e [`edita.html´](https://github.com/teoria-da-computacao/django-aula-02/blob/master/tarefas/templates/tarefas/edita.html#L9)).
